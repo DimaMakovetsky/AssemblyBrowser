@@ -13,26 +13,27 @@ using BlockInfo = AssemblyChecker.BlockInfo;
 
 namespace AssemblyChecker
 {
-    class AssemblyCheck
+    public class AssemblyCheck
     {
-        public List<Container> GetAssemblyInfo(string filePath)
+        public List<ContainerInAssembly> GetAssemblyInfo(string filePath)
         {
             string extension = Path.GetExtension(filePath);
             if (!extension.Equals(".dll") && !extension.Equals(".exe"))
             {
+                
                 throw new ExeptionsChecker("Passed filepath is not assembly");
             }
-
+            Console.WriteLine(filePath);
             var assembly = Assembly.LoadFrom(filePath);
-
-            var assemblyInfo = new Dictionary<string, Container>();
-
+            Console.WriteLine("ASS2");
+            var assemblyInfo = new Dictionary<string, ContainerInAssembly>();
+            Console.WriteLine(assembly);
             foreach (var type in assembly.GetTypes())
             {
                 try
                 {
                     if (!assemblyInfo.ContainsKey(type.Namespace))
-                        assemblyInfo.Add(type.Namespace, new Container(type.Namespace, ClassFormatter.Format(type)));
+                        assemblyInfo.Add(type.Namespace, new ContainerInAssembly(type.Namespace, ClassFormatter.Format(type)));
 
                     assemblyInfo.TryGetValue(type.Namespace, out var container);
 
@@ -48,9 +49,9 @@ namespace AssemblyChecker
             return assemblyInfo.Values.ToList();
         }
 
-        private static Dictionary<string, Container> GetExtensionNamespaces(Type classType, Dictionary<string, Container> assemblyInfo)
+        private static Dictionary<string, ContainerInAssembly> GetExtensionNamespaces(Type classType, Dictionary<string, ContainerInAssembly> assemblyInfo)
         {
-            var extensionClasses = new Dictionary<string, Container>();
+            var extensionClasses = new Dictionary<string, ContainerInAssembly>();
 
             foreach (var method in classType.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
             {
@@ -60,9 +61,9 @@ namespace AssemblyChecker
                 var type = method.GetParameters()[0].ParameterType;
 
                 if (!assemblyInfo.ContainsKey(type.Namespace))
-                    assemblyInfo.Add(type.Namespace, new Container(type.Namespace, ClassFormatter.Format(type)));
+                    assemblyInfo.Add(type.Namespace, new ContainerInAssembly(type.Namespace, ClassFormatter.Format(type)));
 
-                Container @class = new Container(ClassFormatter.Format(type), ClassFormatter.Format(type));
+                ContainerInAssembly @class = new ContainerInAssembly(ClassFormatter.Format(type), ClassFormatter.Format(type));
                 @class.Members.Add(new BlockInfo(MethodFormatter.Format(method) + " — метод расширения", ClassFormatter.Format(classType)));
 
                 assemblyInfo.TryGetValue(type.Namespace, out var container);
@@ -73,9 +74,9 @@ namespace AssemblyChecker
             return assemblyInfo;
         }
 
-        private static Container GetMembers(Type type)
+        private static ContainerInAssembly GetMembers(Type type)
         {
-            var member = new Container(ClassFormatter.Format(type), ClassFormatter.Format(type));
+            var member = new ContainerInAssembly(ClassFormatter.Format(type), ClassFormatter.Format(type));
 
             var members = GetFields(type);
             members.AddRange(GetProperties(type));

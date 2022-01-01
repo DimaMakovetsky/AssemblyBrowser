@@ -96,5 +96,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AssemblyChecker\AssemblyChecker.csproj">
+      <Project>{83793654-81a0-4a32-bd20-72445d9ad0eb}</Project>
+      <Name>AssemblyChecker</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

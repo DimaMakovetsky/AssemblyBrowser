@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace AssemblyChecker
 {
-    public class Container:BlockInfo
+    public class ContainerInAssembly:BlockInfo
     {
         public List<BlockInfo> Members { get; set; }
 
-        public Container(string @namespace, string @class, string signature, List<BlockInfo> members) : base(@namespace, @class)
+        public ContainerInAssembly(string @namespace, string @class, string signature, List<BlockInfo> members) : base(@namespace, @class)
         {
             Signature = signature;
             Members = members;
         }
-        public Container(string @namespace, string @class) : base(@namespace, @class)
+        public ContainerInAssembly(string @namespace, string @class) : base(@namespace, @class)
         {
             Members = new List<BlockInfo>();
         }

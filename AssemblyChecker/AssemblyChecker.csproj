@@ -44,7 +44,7 @@
     <Compile Include="AssemblyCheck.cs" />
     <Compile Include="ClassFormatter.cs" />
     <Compile Include="ConstructorFormatter.cs" />
-    <Compile Include="Container.cs" />
+    <Compile Include="ContainerInAssembly.cs" />
     <Compile Include="BlockInfo.cs" />
     <Compile Include="ExeptionsChecker.cs" />
     <Compile Include="FieldFormatter.cs" />

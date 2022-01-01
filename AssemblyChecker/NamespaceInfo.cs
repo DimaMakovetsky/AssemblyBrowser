@@ -10,15 +10,15 @@ namespace AssemblyChecker
     {
         public string Signature { get; set; }
 
-        public List<Container> MemberInfo { get; set; }
+        public List<ContainerInAssembly> MemberInfo { get; set; }
 
         public NamespaceInfo(string signature)
         {
-            MemberInfo = new List<Container>();
+            MemberInfo = new List<ContainerInAssembly>();
             Signature = signature;
         }
 
-        public NamespaceInfo(List<Container> memberInfo, string signature)
+        public NamespaceInfo(List<ContainerInAssembly> memberInfo, string signature)
         {
             Signature = signature;
             MemberInfo = memberInfo;
