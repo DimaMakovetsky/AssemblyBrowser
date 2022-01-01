@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace AssemblyChecker
 {
-    class BlockInfo
+    public class BlockInfo
     {
+        public string Signature { get; set; }
+        public string Class { get; set; }
+
+        public BlockInfo(string signature, string @class)
+        {
+            Signature = signature;
+            Class = @class;
+        }
     }
 }
