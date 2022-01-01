@@ -41,10 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyCheck.cs" />
+    <Compile Include="ClassFormatter.cs" />
+    <Compile Include="ConstructorFormatter.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="BlockInfo.cs" />
+    <Compile Include="ExeptionsChecker.cs" />
+    <Compile Include="FieldFormatter.cs" />
+    <Compile Include="MethodFormatter.cs" />
     <Compile Include="NamespaceInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyFormatter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
